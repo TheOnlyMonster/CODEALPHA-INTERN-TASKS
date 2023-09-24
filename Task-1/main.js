@@ -26,7 +26,7 @@ fahrenheit.addEventListener("input", () => {
   const k = (f - 32) * (5 / 9) + 273.15;
   celsius.value = c;
   kelvin.value = k;
-})
+});
 
 kelvin.addEventListener("input", () => {
   if (kelvin.value === "") {
@@ -39,10 +39,10 @@ kelvin.addEventListener("input", () => {
   const f = (k - 273.15) * (9 / 5) + 32;
   celsius.value = c;
   fahrenheit.value = f;
-})
+});
 
 reset.addEventListener("click", () => {
   celsius.value = "";
   fahrenheit.value = "";
   kelvin.value = "";
-})
+});
