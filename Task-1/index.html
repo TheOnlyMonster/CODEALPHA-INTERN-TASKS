@@ -3,9 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>Document</title>
   </head>
   <body>
-    Hello World!
+  <div class="container">
+        <div class="title">
+            <h1>Temperature Converter</h1>
+            <span class="material-symbols-outlined">
+              device_thermostat
+              </span>
+        </div>
+
+        <div id="celsius">
+            <input type="number"  placeholder="Celsius">
+            <span class="icon">&#8451</span>
+        </div>
+        <div id="fahrenheit">
+            <input type="number"  placeholder="Fahrenheit">
+            <span class="icon">&#8457</span>
+        </div>
+        <div id="kelvin">
+            <input type="number"  placeholder="Kelvin">
+            <span class="icon">&#8490</span>
+        </div>
+
+        <div class="button">
+            <button>All Clear</button>
+        </div>
+    </div>
+    <script src="main.js"></script>
   </body>
 </html>
