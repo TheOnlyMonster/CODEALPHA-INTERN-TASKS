@@ -1,12 +1,7 @@
-import NavigationBar from "./components/NavigationBar";
-import Home from "./pages/Home";
+import { RouterProvider } from "react-router-dom";
+import router from "./router";
 function App() {
-  return (
-    <>
-      <NavigationBar />
-      <Home />
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

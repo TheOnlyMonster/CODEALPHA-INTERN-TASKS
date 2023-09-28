@@ -1,0 +1,25 @@
+.btn {
+  margin-top: 20px;
+  cursor: pointer;
+  background-color: rgb(11, 94, 215);
+  color: white;
+  border-color: none;
+  border-radius: 10px;
+  padding: 5px;
+  border-color: transparent;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
+  width: 130px;
+}
+.btn:hover {
+  background-color: rgb(8, 61, 139);
+  color: white;
+  border-color: transparent;
+}

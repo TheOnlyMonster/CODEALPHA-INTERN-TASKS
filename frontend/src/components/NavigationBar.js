@@ -13,15 +13,18 @@ import ListItemText from "@mui/material/ListItemText";
 import Drawer from "@mui/material/Drawer";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import IconButton from '@mui/material/IconButton';
+import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Divider from "@mui/material/Divider";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 export default function NavigationBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <>
-      <Container sx={{ paddingTop: "20px", paddingBottom: "20px" }}>
+      <Container
+        sx={{ paddingTop: "20px", paddingBottom: "20px", marginBottom: "20px" }}
+      >
         <Grid container spacing={2}>
           <Grid xs={12} sm={6} sx={{ display: { xs: "block", sm: "none" } }}>
             <Typography level="h3" textAlign={"center"}>
@@ -65,7 +68,7 @@ export default function NavigationBar() {
           <List>
             {[
               "Sign In",
-              "Post a Blog",
+              "Post Blog",
               "My Blogs",
               "My Profile",
               "Sign New Admin",
@@ -82,7 +85,9 @@ export default function NavigationBar() {
                       <AccountCircleIcon />
                     </ListItemIcon>
                   )}
-                  <ListItemText primary={text} />
+                  <Link to={text.toLowerCase().replace(/\s+/g, "-")} style={{ textDecoration: "none", color: "black" }}>
+                    <ListItemText primary={text} />
+                  </Link>
                 </ListItemButton>
               </ListItem>
             ))}
