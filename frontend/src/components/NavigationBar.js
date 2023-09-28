@@ -37,6 +37,7 @@ export default function NavigationBar() {
               type="search"
               variant="outlined"
               size="small"
+              sx={{ width: "100%" }}
             />
           </Grid>
           <Grid xs={12} sm={6} sx={{ display: { xs: "none", sm: "block" } }}>

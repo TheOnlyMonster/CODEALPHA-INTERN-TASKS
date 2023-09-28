@@ -3,6 +3,8 @@ import ParentElements from "./components/ParentElements";
 import BlogPost from "./pages/PostBlog";
 import Home from "./pages/Home";
 import postBlogAction from "./actions/post-blog";
+import GenericCategory from "./pages/GenericCategory";
+import categoriesLoader from "./loaders/categoriesLoader";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -16,6 +18,11 @@ const router = createBrowserRouter([
         path: "post-blog",
         element: <BlogPost />,
         action: postBlogAction,
+      },
+      {
+        path: "/all-categories",
+        element: <GenericCategory />,
+        loader: categoriesLoader,
       },
     ],
   },

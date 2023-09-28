@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const multer = require("multer");
 const userRoutes = require("./routes/user");
+const blogRoutes = require("./routes/blog");
 const app = express();
 const DB_URL = process.env.CONNECTION_URL;
 const storage = multer.diskStorage({
@@ -43,6 +44,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use(userRoutes);
+app.use(blogRoutes);
 app.use((error, req, res, next) => {
   console.log(error);
   if (!error.statusCode) {
