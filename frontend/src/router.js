@@ -5,6 +5,12 @@ import Home from "./pages/Home";
 import postBlogAction from "./actions/post-blog";
 import GenericCategory from "./pages/GenericCategory";
 import categoriesLoader from "./loaders/categoriesLoader";
+const categoryPaths = ["/all-categories", "/travel", "/technology", "/food", "/business"];
+const categoryRoutes = categoryPaths.map(path => ({
+  path,
+  element: <GenericCategory url={path} />,
+  loader: categoriesLoader,
+}));
 const router = createBrowserRouter([
   {
     path: "/",
@@ -19,12 +25,9 @@ const router = createBrowserRouter([
         element: <BlogPost />,
         action: postBlogAction,
       },
-      {
-        path: "/all-categories",
-        element: <GenericCategory />,
-        loader: categoriesLoader,
-      },
+      ...categoryRoutes,
     ],
   },
 ]);
+
 export default router;

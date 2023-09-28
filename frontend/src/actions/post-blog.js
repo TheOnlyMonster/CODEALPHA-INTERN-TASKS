@@ -4,3 +4,4 @@ export default async function postBlogAction({ request, params }) {
   const response = await fetchData(body, "post", "/post-blog", "Blog created successfully");
   return response;
 }
+
