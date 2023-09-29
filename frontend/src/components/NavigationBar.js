@@ -20,17 +20,33 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 export default function NavigationBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  function getResponsiveGrid(isXSmall) {
+    return (
+      <Grid
+        xs={12}
+        sm={6}
+        sx={{
+          display: {
+            xs: isXSmall ? "block" : "none",
+            sm: isXSmall ? "none" : "block",
+          },
+        }}
+      >
+        <Typography level="h3" textAlign={"center"}>
+          <Link style={{ textDecoration: "none", color: "black", fontWeight: "bold"}} to="/home">
+            CodeAlpha Internship Blog
+          </Link>
+        </Typography>
+      </Grid>
+    );
+  }
   return (
     <>
       <Container
         sx={{ paddingTop: "20px", paddingBottom: "20px", marginBottom: "20px" }}
       >
         <Grid container spacing={2}>
-          <Grid xs={12} sm={6} sx={{ display: { xs: "block", sm: "none" } }}>
-            <Typography level="h3" textAlign={"center"}>
-              CodeAlpha Blog
-            </Typography>
-          </Grid>
+          {getResponsiveGrid(true)}
           <Grid xs={6} sm={3}>
             <TextField
               label="Search.."
@@ -40,11 +56,7 @@ export default function NavigationBar() {
               sx={{ width: "100%" }}
             />
           </Grid>
-          <Grid xs={12} sm={6} sx={{ display: { xs: "none", sm: "block" } }}>
-            <Typography level="h3" textAlign={"center"}>
-              CodeAlpha Blog
-            </Typography>
-          </Grid>
+          {getResponsiveGrid(false)}
           <Grid xs={6} sm={3}>
             <Box
               display={"flex"}
@@ -80,13 +92,16 @@ export default function NavigationBar() {
               "Business",
             ].map((text, index) => (
               <ListItem key={text}>
-                <ListItemButton>
+                <ListItemButton sx={{ padding: "0px" }}>
                   {index === 0 && (
                     <ListItemIcon>
                       <AccountCircleIcon />
                     </ListItemIcon>
                   )}
-                  <Link to={text.toLowerCase().replace(/\s+/g, "-")} style={{ textDecoration: "none", color: "black" }}>
+                  <Link
+                    to={text.toLowerCase().replace(/\s+/g, "-")}
+                    style={{ textDecoration: "none", color: "black", width: "100%", padding: "10px"}}
+                  >
                     <ListItemText primary={text} />
                   </Link>
                 </ListItemButton>

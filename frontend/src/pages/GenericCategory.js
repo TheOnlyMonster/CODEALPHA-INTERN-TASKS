@@ -73,6 +73,7 @@ export default function GenericCategory({ url }) {
                   sx={{
                     display: "flex",
                     justifyContent: "center",
+                    marginTop: "20px",
                   }}
                   onChange={(e, page) => {
                     navigate(`${url}?page=${page}`);

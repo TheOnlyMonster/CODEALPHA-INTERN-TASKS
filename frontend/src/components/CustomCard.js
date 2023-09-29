@@ -19,7 +19,8 @@ export default function CustomCard({
       spacing={2}
       padding={3}
       sx={{
-        ":hover": { cursor: "pointer", transform: "scale(1.03)" },
+        ":hover": { cursor: "pointer", transform: "scale(1.03)", backgroundColor: "#f8f9fa" },
+        borderRadius: "20px",
         transition: "all 0.3s ease-in-out",
       }}
     >
