@@ -3,12 +3,11 @@ import Footer from "./Footer";
 import NavigationBar from "./NavigationBar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-export default function ParentElements({children}) {
+export default function ParentElements() {
   return (
     <>
       <NavigationBar />
       <Outlet />
-      {children}
       <ToastContainer theme="colored" />
       <Footer />
     </>

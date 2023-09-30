@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const multer = require("multer");
 const userRoutes = require("./routes/user");
 const blogRoutes = require("./routes/blog");
+const authRoutes = require("./routes/auth");
 const app = express();
 const DB_URL = process.env.CONNECTION_URL;
 const storage = multer.diskStorage({
@@ -40,9 +41,10 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Methods",
     "OPTIONS, GET, POST, PUT, PATCH, DELETE"
   );
-  //res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   next();
 });
+app.use(authRoutes);
 app.use(userRoutes);
 app.use(blogRoutes);
 app.use((error, req, res, next) => {

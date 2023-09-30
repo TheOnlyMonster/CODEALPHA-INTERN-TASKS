@@ -1,12 +1,11 @@
 const { validationResult } = require("express-validator");
-const isValidationError = (req) => {
+const isValidationError = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const error = errors.array()[0];
     error.statusCode = 422;
-    return error;
+    return next(error);
   }
-  return null;
+  next();
 };
-
 module.exports = isValidationError;

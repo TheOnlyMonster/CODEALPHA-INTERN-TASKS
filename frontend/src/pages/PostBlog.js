@@ -9,7 +9,7 @@ import GenericForm from "../components/GenericForm";
 import GenericTextField from "../components/GenericTextField";
 import Select from "react-select";
 import { Field } from "formik";
-import "./PostBlog.css"
+import "./PostBlog.css";
 const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/png"];
 const options = [
   { value: "Travel", label: "Travel" },
@@ -46,7 +46,6 @@ function BlogPost() {
     content: yup.string().required("Content is required"),
   });
   return (
-    <>
     <Container sx={{ paddingTop: "20px" }}>
       <Typography
         level="h2"
@@ -87,9 +86,9 @@ function BlogPost() {
                       }}
                     />
                     {meta.touched && meta.error && (
-                      <Typography variant="body2" color="error">
+                      <div style={{ color: "#d32f2f", fontSize: "0.875rem" }}>
                         {meta.error}
-                      </Typography>
+                      </div>
                     )}
                   </>
                 )}
@@ -118,9 +117,7 @@ function BlogPost() {
           </Grid>
         </Grid>
       </GenericForm>
-      </Container>
-      
-    </>
+    </Container>
   );
 }
 

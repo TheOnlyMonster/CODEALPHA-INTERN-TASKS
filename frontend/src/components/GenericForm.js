@@ -1,21 +1,21 @@
 import { Formik } from "formik";
-import { useFetcher, useSubmit } from "react-router-dom";
+import { useFetcher } from "react-router-dom";
 import GenericTextField from "./GenericTextField";
-import { Box } from "@mui/material";
-import styles from "./GenericForm.module.css";
+import { Box, Button } from "@mui/material";
+
 export default function GenericForm({
   formNames = [],
   type = null,
-  item = null,
+  onClose = null,
+  initialValues = false,
   schema,
   children,
   submitText,
   enableReinitialize = true,
+  method = "post",
   action,
-  token = null,
 }) {
   const fetcher = useFetcher();
-  const submit = useSubmit();
   function formSubmitHandler(values) {
     let data;
     if (type === "mixed") {
@@ -28,17 +28,22 @@ export default function GenericForm({
           data.append(name, values[name]);
         }
       });
-    } else if (type === "json") {
-      data = JSON.stringify(values);
     } else {
-      data = item;
+      data = values;
     }
-    submit(data, { method: "post", action, encType: "multipart/form-data" });
+    fetcher.submit(data, {
+      method,
+      action,
+      encType: type === "mixed" ? "multipart/form-data" : "",
+    });
   }
-  const initialValues = {};
-  for (const formName of formNames) {
-    initialValues[formName] = "";
+  if (!initialValues) {
+    initialValues = {};
+    for (const formName of formNames) {
+      initialValues[formName] = "";
+    }
   }
+
   return (
     <Formik
       onSubmit={formSubmitHandler}
@@ -60,9 +65,18 @@ export default function GenericForm({
             </Box>
           )}
           {children}
-          <button type="submit" className={styles.btn}>
-            {submitText}
-          </button>
+          {
+            <Box marginTop={"20px"} display={"flex"} gap={"10px"} >
+              <Button type="submit" variant="contained">
+                {submitText}
+              </Button>
+              {onClose && (
+                <Button variant="outlined" onClick={() => onClose(false)}>
+                  Cancel
+                </Button>
+              )}
+            </Box>
+          }
         </fetcher.Form>
       )}
     </Formik>

@@ -3,12 +3,10 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Grid from "@mui/joy/Grid";
 import List from "@mui/material/List";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Typography from "@mui/joy/Typography";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Drawer from "@mui/material/Drawer";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -17,9 +15,11 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Divider from "@mui/material/Divider";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData, useSubmit } from "react-router-dom";
 export default function NavigationBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const submit = useSubmit();
+  const listItems = useLoaderData();
   function getResponsiveGrid(isXSmall) {
     return (
       <Grid
@@ -33,7 +33,14 @@ export default function NavigationBar() {
         }}
       >
         <Typography level="h3" textAlign={"center"}>
-          <Link style={{ textDecoration: "none", color: "black", fontWeight: "bold"}} to="/home">
+          <Link
+            style={{
+              textDecoration: "none",
+              color: "black",
+              fontWeight: "bold",
+            }}
+            to="/home"
+          >
             CodeAlpha Internship Blog
           </Link>
         </Typography>
@@ -54,6 +61,15 @@ export default function NavigationBar() {
               variant="outlined"
               size="small"
               sx={{ width: "100%" }}
+              onKeyPress={(e) => {
+                const searchValue = e.target.value;
+                if (e.key === "Enter" && searchValue) {
+                  submit(null, {
+                    method: "get",
+                    action: `/search/${searchValue}`,
+                  });
+                }
+              }}
             />
           </Grid>
           {getResponsiveGrid(false)}
@@ -64,9 +80,24 @@ export default function NavigationBar() {
               gap={2}
               justifyContent={"flex-end"}
             >
-              <TwitterIcon sx={{ fontSize: "0.7rem" }} />
-              <GitHubIcon sx={{ fontSize: "0.7rem" }} />
-              <LinkedInIcon sx={{ fontSize: "0.7rem" }} />
+              <a
+                style={{ color: "inherit" }}
+                href="https://twitter.com/RealMonsterPlay"
+              >
+                <TwitterIcon sx={{ fontSize: "0.7rem" }} />
+              </a>
+              <a
+                style={{ color: "inherit" }}
+                href="https://github.com/TheOnlyMonster"
+              >
+                <GitHubIcon sx={{ fontSize: "0.7rem" }} />
+              </a>
+              <a
+                style={{ color: "inherit" }}
+                href="https://www.linkedin.com/in/abdelrahman-adel-843428224/"
+              >
+                <LinkedInIcon sx={{ fontSize: "0.7rem" }} />
+              </a>
               <IconButton onClick={() => setIsMenuOpen(true)} color="primary">
                 <MenuIcon />
               </IconButton>
@@ -79,28 +110,18 @@ export default function NavigationBar() {
           onClose={() => setIsMenuOpen(false)}
         >
           <List>
-            {[
-              "Sign In",
-              "Post Blog",
-              "My Blogs",
-              "My Profile",
-              "Sign New Admin",
-              "All Categories",
-              "Travel",
-              "Food",
-              "Technology",
-              "Business",
-            ].map((text, index) => (
+            {listItems.map((text, index) => (
               <ListItem key={text}>
                 <ListItemButton sx={{ padding: "0px" }}>
-                  {index === 0 && (
-                    <ListItemIcon>
-                      <AccountCircleIcon />
-                    </ListItemIcon>
-                  )}
                   <Link
                     to={text.toLowerCase().replace(/\s+/g, "-")}
-                    style={{ textDecoration: "none", color: "black", width: "100%", padding: "10px"}}
+                    style={{
+                      textDecoration: "none",
+                      color: "black",
+                      width: "100%",
+                      padding: "10px",
+                      paddingLeft: "40px",
+                    }}
                   >
                     <ListItemText primary={text} />
                   </Link>
